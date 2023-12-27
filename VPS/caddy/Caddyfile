@@ -1,0 +1,7 @@
+gmap.turun.de {
+	reverse_proxy wireguard:10203
+}
+
+vpn.turun.de {
+	reverse_proxy wireguard:51821
+}

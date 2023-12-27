@@ -1,0 +1,48 @@
+version: "3"
+
+services:
+  wireguard:
+    container_name: "wiregurad"
+    image: "ghcr.io/wg-easy/wg-easy"
+    restart: "unless-stopped"
+    env_file: ".env"
+    environment:
+      - WG_DEFAULT_DNS="" 
+      - WG_DEFAULT_ADDRESS="10.8.0.x" 
+      - WG_ALLOWED_IPS="10.8.0.0/24"
+      - WG_PERSISTENT_KEEPALIVE=25
+      - WG_MTU=1420
+      - |
+        WG_POST_UP=
+          iptables -t nat -A POSTROUTING -s 10.8.0.1/24 -o eth0 -j MASQUERADE;
+          iptables -A INPUT -p udp -m udp --dport 51820 -j ACCEPT;
+          iptables -A FORWARD -i wg0 -j ACCEPT;
+          iptables -A FORWARD -o wg0 -j ACCEPT;
+          iptables -A FORWARD -i eth0 -o wg0 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT;
+          iptables -A FORWARD -i wg0 -o eth0 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT;
+          iptables -A FORWARD -i eth0 -o wg0 -p tcp --dport 10203 -m conntrack --ctstate NEW -j ACCEPT;
+          iptables -t nat -A PREROUTING  -i eth0 -p tcp --dport 10203             -j DNAT --to-destination 10.8.0.4;
+          iptables -t nat -A POSTROUTING -o wg0  -p tcp --dport 10203 -d 10.8.0.4 -j SNAT --to-source      10.8.0.1;
+    sysctls:
+      - "net.ipv4.ip_forward=1"
+      - "net.ipv4.conf.all.src_valid_mark=1"
+    cap_add:
+      - "NET_ADMIN"
+      - "SYS_MODULE"
+    expose:
+      - "51821"
+    ports:
+      - "51820:51820/udp"
+    volumes:
+      - "/data/wireguard/config:/etc/wireguard"
+    networks:
+      - dockeronly
+      - internet
+
+networks:
+  dockeronly:
+    name: "dockeronly"
+    internal: true
+    attachable: true
+  internet:
+    name: "internet"

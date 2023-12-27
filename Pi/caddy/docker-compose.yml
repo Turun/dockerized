@@ -1,0 +1,29 @@
+version: "3.3"
+
+services:
+  caddy:
+    container_name: "caddy"
+    image: "caddy:2.6"
+    restart: "unless-stopped"
+    environment:
+      - PUID=1000
+      - PGID=1000
+    ports:
+    - "80:80"
+    - "443:443"
+    - "443:443/udp"
+    volumes:
+      - "/data/caddy/data:/data"
+      - "/data/caddy/config:/config"
+      - "./Caddyfile:/etc/caddy/Caddyfile"
+    networks:
+      - dockeronly
+      - internet
+
+networks:
+  dockeronly:
+    name: "dockeronly"
+    internal: true
+    attachable: true
+  internet:
+    name: "internet"

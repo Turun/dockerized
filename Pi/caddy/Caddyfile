@@ -1,0 +1,14 @@
+
+jf.local.{$HOSTNAME}:80
+jellyfin.local.{$HOSTNAME}:80
+jf.vpn.{$HOSTNAME}:80
+jellyfin.vpn.{$HOSTNAME}:80 {
+	reverse_proxy jellyfin:8096
+}
+
+git.local.{$HOSTNAME}:80
+git.vpn.{$HOSTNAME}:80 {
+	reverse_proxy gitea:3000
+}
+
+
