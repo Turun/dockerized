@@ -34,7 +34,7 @@ services:
     ports:
       - "51820:51820/udp"
     volumes:
-      - "/data/wireguard/config:/etc/wireguard"
+      - "/data/wireguard:/etc/wireguard"
     networks:
       - dockeronly
       - internet
