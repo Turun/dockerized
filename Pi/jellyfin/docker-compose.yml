@@ -1,4 +1,4 @@
-version: "3.3"
+version: "3.5"
 
 services:
   jellyfin:
@@ -20,13 +20,8 @@ services:
       - "/data/jellyfin/cache:/cache"
       - "/data/media:/media"
     networks:
-      - dockeronly
       - internet
 
 networks:
-  dockeronly:
-    name: "dockeronly"
-    internal: true
-    attachable: true
   internet:
     name: "internet"

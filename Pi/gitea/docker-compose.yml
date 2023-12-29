@@ -1,4 +1,4 @@
-version: "3.3"
+version: "3.5"
 
 services:
   gitea:
@@ -15,14 +15,9 @@ services:
     volumes:
       - "/data/gitea:/data"
     networks:
-      - dockeronly
       - internet
 
 networks:
-  dockeronly:
-    name: "dockeronly"
-    internal: true
-    attachable: true
   internet:
     name: "internet"
 
