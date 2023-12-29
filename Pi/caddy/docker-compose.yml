@@ -5,6 +5,8 @@ services:
     container_name: "caddy"
     image: "caddy:2.6"
     restart: "unless-stopped"
+    env_file:
+      - ".env"
     environment:
       - PUID=1000
       - PGID=1000
