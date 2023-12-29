@@ -1,4 +1,4 @@
-version: "3"
+version: "3.5"
 
 services:
   watchtower:
@@ -13,13 +13,8 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     networks:
-      - dockeronly
       - internet
 
 networks:
-  dockeronly:
-    name: "dockeronly"
-    internal: true
-    attachable: true
   internet:
     name: "internet"
