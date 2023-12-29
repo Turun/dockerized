@@ -3,7 +3,7 @@ version: "3.5"
 services:
   watchtower:
     container_name: "watchtower"
-    image: "containrrr/watchtower:arm64v8-latest"
+    image: "containrrr/watchtower:latest"
     restart: "unless-stopped"
     environment:
       - WATCHTOWER_CLEANUP=true
