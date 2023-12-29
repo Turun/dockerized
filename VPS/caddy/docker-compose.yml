@@ -1,4 +1,4 @@
-version: "3.3"
+version: "3.5"
 
 services:
   caddy:
@@ -15,13 +15,8 @@ services:
       - "/data/caddy/config:/config"
       - "./Caddyfile:/etc/caddy/Caddyfile"
     networks:
-      - dockeronly
       - internet
 
 networks:
-  dockeronly:
-    name: "dockeronly"
-    internal: true
-    attachable: true
   internet:
     name: "internet"
