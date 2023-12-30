@@ -5,7 +5,8 @@ services:
     container_name: "wireguard"
     image: "ghcr.io/wg-easy/wg-easy"
     restart: "unless-stopped"
-    env_file: ".env"
+    env_file: 
+      - ".env"  # WG_HOST, PASSWORD
     environment:
       - WG_DEFAULT_DNS="" 
       - WG_DEFAULT_ADDRESS="10.8.0.x" 

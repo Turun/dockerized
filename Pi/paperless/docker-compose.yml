@@ -58,7 +58,7 @@ services:
       - /data/paperless/export:/usr/src/paperless/export
       - /data/paperless/consume:/usr/src/paperless/consume
     env_file: 
-      - ".env"
+      - ".env"  # PAPERLESS_URL
     environment:
       PAPERLESS_REDIS: redis://broker:6379
       PAPERLESS_DBHOST: db
