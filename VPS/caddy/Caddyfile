@@ -1,7 +1,7 @@
-gmap.turun.de {
+gmap.{$HOSTNAME} {
 	reverse_proxy wireguard:10203
 }
 
-vpn.turun.de {
+vpn.{$HOSTNAME} {
 	reverse_proxy wireguard:51821
 }
