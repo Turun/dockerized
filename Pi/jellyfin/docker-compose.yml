@@ -1,3 +1,5 @@
+# https://old.reddit.com/r/jellyfin/comments/ei6ew6/rpi4_hardware_acceleration_guide/
+# potentially something we could try in the future
 version: "3.5"
 
 services:
