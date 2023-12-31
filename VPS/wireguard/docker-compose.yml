@@ -8,9 +8,9 @@ services:
     env_file: 
       - ".env"  # WG_HOST, PASSWORD
     environment:
-      - WG_DEFAULT_DNS="" 
-      - WG_DEFAULT_ADDRESS="10.8.0.x" 
-      - WG_ALLOWED_IPS="10.8.0.0/24"
+      - WG_DEFAULT_DNS=
+      - WG_DEFAULT_ADDRESS=10.8.0.x
+      - WG_ALLOWED_IPS=10.8.0.0/24
       - WG_PERSISTENT_KEEPALIVE=25
       - WG_MTU=1420
       - WG_POST_UP=iptables -t nat -A POSTROUTING -s 10.8.0.1/24 -o eth0 -j MASQUERADE;
