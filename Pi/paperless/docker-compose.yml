@@ -39,7 +39,7 @@ services:
 
   webserver:
     image: ghcr.io/paperless-ngx/paperless-ngx:latest
-    container_name: paperless_webserver
+    container_name: paperless
     restart: unless-stopped
     stop_grace_period: 60s 
     depends_on:
@@ -72,14 +72,12 @@ services:
       PAPERLESS_WEBSERVER_WORKERS: 1
       PAPERLESS_NUMBER_OF_SUGGESTED_DATES: 7
     networks:
-      - dockeronly
+      - internet
       - paperless
 
 networks:
-  dockeronly:
-    name: "dockeronly"
-    internal: true
-    attachable: true
+  internet:
+    name: "internet"
   paperless:
     name: "paperless"
     internal: true
