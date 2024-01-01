@@ -70,6 +70,7 @@ services:
       PAPERLESS_TASK_WORKERS: 1
       PAPERLESS_THREADS_PER_WORKER: 1
       PAPERLESS_WEBSERVER_WORKERS: 1
+      PAPERLESS_NUMBER_OF_SUGGESTED_DATES: 7
     networks:
       - dockeronly
       - paperless
