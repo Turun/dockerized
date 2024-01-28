@@ -5,6 +5,8 @@ services:
     container_name: "caddy"
     image: "caddy:2.6"
     restart: "unless-stopped"
+    cap_add:  # improve performance of HTTP/3 connections by allowing caddy to change the UDP buffer size of the system.
+      - "NET_ADMIN"
     env_file:
       - ".env"  # HOSTNAME
     environment:
