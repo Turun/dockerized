@@ -5,7 +5,7 @@ services:
     image: netdata/netdata
     container_name: netdata
     pid: host
-    network_mode: host
+    # network_mode: host  # conflicts with my dockeronly network. But changing from dockeronly network to hostnetwork somehow breaks the app. And even though host network mode is suggested by the documentation it seems to be working fine with my dockeronly network stack
     restart: unless-stopped
     expose:
       - 19999
