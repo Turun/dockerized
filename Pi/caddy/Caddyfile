@@ -11,7 +11,7 @@ paperless.local.{$HOSTNAME}:80 paperless.vpn.{$HOSTNAME}:80 {
 	reverse_proxy paperless:8000
 }
 
-seafile.local.{$HOSTNAME}:80 seafile.vpn.{$HOSTNAME}:80 {
-	reverse_proxy seafile:80
+netdata.local.{$HOSTNAME}:80 netdata.vpn.{$HOSTNAME}:80 {
+	reverse_proxy netdata:19999
 }
 
