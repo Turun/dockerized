@@ -5,16 +5,14 @@ services:
     container_name: "watchtower"
     image: "containrrr/watchtower:latest"
     restart: "unless-stopped"
+    env_file:
+      - ".env"  # WATCHTOWER_NOTIFICATION_URL
     environment:
       - WATCHTOWER_CLEANUP=true
       - WATCHTOWER_ROLLING_RESTART=false
       - WATCHTOWER_SCHEDULE=0 0 4 * * sat
       - WATCHTOWER_TIMEOUT=100s
+      - WATCHTOWER_NOTIFICATIONS=shoutrrr
+      - WATCHTOWER_NOTIFICATION_TITLE_TAG=VPS
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
-    networks:
-      - internet
-
-networks:
-  internet:
-    name: "internet"
