@@ -23,6 +23,7 @@ services:
     networks:
       - dockeronly
       - internet
+    mem_limit: "1G"
 
 networks:
   dockeronly:
