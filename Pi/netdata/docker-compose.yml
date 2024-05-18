@@ -2,7 +2,7 @@ version: '3'
 
 services:
   netdata:
-    image: netdata/netdata
+    image: "netdata/netdata:v1.45.4"
     container_name: netdata
     hostname: Nienna
     pid: host
@@ -27,8 +27,6 @@ services:
       - /etc/os-release:/host/etc/os-release:ro
       - /var/log:/host/var/log:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    labels:
-      - "com.centurylinklabs.watchtower.enable=false"
     networks:
       - dockeronly
 
