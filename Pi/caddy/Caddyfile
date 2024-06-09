@@ -15,3 +15,7 @@ netdata.local.{$HOSTNAME}:80 netdata.vpn.{$HOSTNAME}:80 {
 	reverse_proxy netdata:19999
 }
 
+kuma.local.{$HOSTNAME}:80 kuma.vpn.{$HOSTNAME}:80 {
+	reverse_proxy kuma:3001
+}
+
