@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   kuma:
-    container-name: "kuma"
+    container_name: "kuma"
     image: "louislam/uptime-kuma:1"
     restart: "unless-stopped"
     volumes:
