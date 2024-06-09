@@ -1,0 +1,52 @@
+
+services:
+  prometheus:
+    container_name: "prometheus"
+    image: "prom/prometheus:latest"
+    restart: "unless-stopped"
+    expose:
+      - 9090
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.retention.size=1GB"
+    volumes:
+      - "./prometheus.yml:/etc/prometheus/prometheus.yml:ro"
+      - "/data/prometheus:/prometheus"
+    networks:
+      - internet
+      - dockeronly
+
+  grafana:
+    container_name: "grafana"
+    image: "grafana/grafana-oss:latest"
+    restart: "unless-stopped"
+    expose:
+      - 3000
+    volumes:
+      - "/data/grafana:/var/lib/grafana"
+    networks:
+      - dockeronly
+
+  node_exporter:
+    container_name: "node_exporter"
+    image: "quay.io/prometheus/node-exporter:latest"
+    restart: "unless-stopped"
+    expose:
+      - "9100"
+    command:
+      - "--path.rootfs=/host"
+    volumes:
+      - "/:/host:ro,rslave"
+#      - "/proc:/host/proc:ro,rslave"
+#      - "/sys:/host/sys:ro,rslave"
+    networks:
+      - dockeronly
+
+networks:
+  dockeronly:
+    name: "dockeronly"
+    internal: true
+    attachable: true
+  internet:
+    name: "internet"
+
