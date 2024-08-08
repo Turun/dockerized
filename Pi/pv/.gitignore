@@ -1,0 +1,4 @@
+# the magic sauce to query the solarpanel for new data whenever a 
+# prometheus request comes in and give the data back in a format 
+# that prometheus can understand.
+hoymiles_prometheus_client

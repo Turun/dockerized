@@ -1,0 +1,19 @@
+
+services:
+  grafana_pv:
+    container_name: "grafana_pv"
+    image: "grafana/grafana-oss:latest"
+    restart: "unless-stopped"
+    expose:
+      - 3000
+    volumes:
+      - "/data/grafana_pv:/var/lib/grafana"
+    networks:
+      - dockeronly
+
+networks:
+  dockeronly:
+    name: "dockeronly"
+    internal: true
+    attachable: true
+
