@@ -23,7 +23,7 @@ services:
       - paperless
 
   db:
-    image: docker.io/library/postgres:15
+    image: docker.io/library/postgres:16
     container_name: paperless_postgres
     restart: unless-stopped
     expose:
@@ -41,7 +41,7 @@ services:
     image: ghcr.io/paperless-ngx/paperless-ngx:latest
     container_name: paperless
     restart: unless-stopped
-    stop_grace_period: 60s 
+    stop_grace_period: 60s
     depends_on:
       - db
       - broker
