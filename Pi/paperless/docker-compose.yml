@@ -9,6 +9,8 @@
 # For more extensive installation and update instructions, refer to the
 # documentation.
 
+# https://nerdyarticles.com/a-clutter-free-life-with-paperless-ngx/#effortless-editing-perfecting-your-documents
+
 version: "3.5"
 services:
   broker:
@@ -23,7 +25,7 @@ services:
       - paperless
 
   db:
-    image: docker.io/library/postgres:16
+    image: docker.io/library/postgres:15
     container_name: paperless_postgres
     restart: unless-stopped
     expose:
@@ -58,7 +60,7 @@ services:
       - /data/paperless/export:/usr/src/paperless/export
       - /data/paperless/consume:/usr/src/paperless/consume
     env_file: 
-      - ".env"  # PAPERLESS_URL
+      - ".env"  # PAPERLESS_URL, PAPERLESS_ALLOWED_HOSTS, PAPERLESS_SECRET_KEY
     environment:
       PAPERLESS_REDIS: redis://broker:6379
       PAPERLESS_DBHOST: db
@@ -66,7 +68,9 @@ services:
       USERMAP_GID: 1000
       PAPERLESS_OCR_LANGUAGE: deu
       PAPERLESS_OCR_LANGUAGES: eng deu
+      # PAPERLESS_OCR_SKIP_ARCHIVE_FILE: with_text  # set this when uploading signed documents, then dc up -d --build (https://github.com/paperless-ngx/paperless-ngx/discussions/5657#discussioncomment-8368802)
       PAPERLESS_TIME_ZONE: Europe/Berlin
+      PAPERLESS_FILENAME_FORMAT: "{{created}} - {{correspondent}} - {{title}}"
       PAPERLESS_TASK_WORKERS: 1
       PAPERLESS_THREADS_PER_WORKER: 1
       PAPERLESS_WEBSERVER_WORKERS: 1
