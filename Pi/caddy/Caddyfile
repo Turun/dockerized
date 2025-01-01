@@ -1,3 +1,10 @@
+{
+	servers {
+		trusted_proxies static private_ranges
+	}
+}
+
+
 
 jf.local.{$HOSTNAME}:80 jellyfin.local.{$HOSTNAME}:80 jf.vpn.{$HOSTNAME}:80 jellyfin.vpn.{$HOSTNAME}:80 {
 	reverse_proxy jellyfin:8096
