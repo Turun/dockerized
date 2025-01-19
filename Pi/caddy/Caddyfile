@@ -17,7 +17,7 @@ git.local.{$HOSTNAME}:80 git.vpn.{$HOSTNAME}:80 {
 
 paperless.vpn.{$HOSTNAME}:80 {
 	# only listen on the 10.8.0.4 interface
-	bind 10.8.0.4
+	# bind 10.8.0.4
 	reverse_proxy paperless:8000
 }
 
