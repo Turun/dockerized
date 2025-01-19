@@ -1,4 +1,5 @@
 {
+	# Enabling this causes trusted requests to have the real client IP parsed from HTTP headers 
 	servers {
 		trusted_proxies static private_ranges
 	}
@@ -14,7 +15,9 @@ git.local.{$HOSTNAME}:80 git.vpn.{$HOSTNAME}:80 {
 	reverse_proxy gitea:3000
 }
 
-paperless.local.{$HOSTNAME}:80 paperless.vpn.{$HOSTNAME}:80 {
+paperless.vpn.{$HOSTNAME}:80 {
+	# only listen on the 10.8.0.4 interface
+	bind 10.8.0.4
 	reverse_proxy paperless:8000
 }
 
