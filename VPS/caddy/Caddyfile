@@ -1,7 +1,41 @@
+fe.{$HOSTNAME} {
+    root * static/formation_energy
+    file_server
+}
+
+reflector.gmap.{$HOSTNAME} {
+    log {
+        output file /logs/reflector_gmap.log {
+            roll_size 25MiB
+            roll_keep 4
+        }
+    }
+
+    # # when testing we need this to allow requests from localhost to come through
+    # header Access-Control-Allow-Origin *
+    # # for normal operation, only allow from our domain
+    header Access-Control-Allow-Origin "https://gmap.{$HOSTNAME}"
+
+    reverse_proxy grepolis_api_reflector:3000
+}
+
 gmap.{$HOSTNAME} {
-	reverse_proxy wireguard:10203
+    log {
+        output file /logs/gmap.log {
+            roll_size 25MiB
+            roll_keep 4
+        }
+    }
+
+    handle /v1/* {
+        reverse_proxy wireguard:10203
+    }
+    handle {
+        root * static/turunmap
+        file_server
+    }
 }
 
 vpn.{$HOSTNAME} {
-	reverse_proxy wireguard:51821
+    reverse_proxy wireguard:51821
 }
