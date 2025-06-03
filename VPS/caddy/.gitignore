@@ -1,1 +1,4 @@
-static/
+# copy in from https://github.com/Turun/GrepolisMap > trunk build --release
+static/turunmap
+# copy in from (not published) > trunk build --release
+static/formation_energy
