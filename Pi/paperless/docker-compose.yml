@@ -68,7 +68,11 @@ services:
       USERMAP_GID: 1000
       PAPERLESS_OCR_LANGUAGE: deu
       PAPERLESS_OCR_LANGUAGES: eng deu
-      # PAPERLESS_OCR_SKIP_ARCHIVE_FILE: with_text  # set this when uploading signed documents, then dc up -d --build (https://github.com/paperless-ngx/paperless-ngx/discussions/5657#discussioncomment-8368802)
+      # The following flag (PAPERLESS_OCR_SKIP_ARCHIVE_FILE) ensures that pdfs with embedded text do not 
+      # run through the OCR part again. This is necessary, because signed documents crash the ingest process 
+      # if they are sent to OCR. 
+      # set this when uploading signed documents, then dc up -d --build (https://github.com/paperless-ngx/paperless-ngx/discussions/5657#discussioncomment-8368802)
+      PAPERLESS_OCR_SKIP_ARCHIVE_FILE: with_text
       PAPERLESS_TIME_ZONE: Europe/Berlin
       PAPERLESS_FILENAME_FORMAT: "{{created}} - {{correspondent}} - {{title}}"
       PAPERLESS_TASK_WORKERS: 1
