@@ -8,7 +8,7 @@ services:
       - 9090
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
-      - "--storage.tsdb.retention.size=1GB"
+      - "--storage.tsdb.retention.time=10y"
     volumes:
       - "./prometheus.yml:/etc/prometheus/prometheus.yml:ro"
       - "/data/prometheus_pv:/prometheus"
