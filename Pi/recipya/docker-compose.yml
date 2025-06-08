@@ -1,0 +1,34 @@
+# Documentation for the environment variables: https://recipes.musicavis.ca/docs/installation/docker/#environment-variables
+services:
+  web:
+    image: reaper99/recipya:v1.2.2
+    container_name: recipya
+    restart: unless-stopped
+    environment:
+      RECIPYA_EMAIL: ""
+      RECIPYA_EMAIL_SMTP_HOST: ""
+      RECIPYA_EMAIL_SMTP_USERNAME: ""
+      RECIPYA_EMAIL_SMTP_PASSWORD: ""
+      RECIPYA_DI_KEY: ""
+      RECIPYA_DI_ENDPOINT: ""
+      RECIPYA_SERVER_AUTOLOGIN: "true"
+      RECIPYA_SERVER_IS_DEMO: "false"
+      RECIPYA_SERVER_IS_PROD: "true"
+      RECIPYA_SERVER_NO_SIGNUPS: "true"
+      RECIPYA_SERVER_PORT: "8078"
+      RECIPYA_SERVER_URL: "http://0.0.0.0"
+    volumes:
+      - "/data/recipya:/root/.config/Recipya"
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
+    networks:
+      - dockeronly
+      - internet
+      
+networks:
+  dockeronly:
+    name: "dockeronly"
+    internal: true
+    attachable: true
+  internet:
+    name: "internet"

@@ -32,3 +32,7 @@ prometheus.local.{$HOSTNAME}:80 prometheus.vpn.{$HOSTNAME}:80 {
 	reverse_proxy prometheus_pv:9090
 }
 
+recipya.local.{$HOSTNAME}:80 recipya.vpn.{$HOSTNAME}:80 {
+	reverse_proxy recipya:8078
+}
+
