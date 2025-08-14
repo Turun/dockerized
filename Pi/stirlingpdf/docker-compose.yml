@@ -1,0 +1,25 @@
+version: '3.3'
+services:
+  stirling-pdf:
+    image: docker.stirlingpdf.com/stirlingtools/stirling-pdf:latest
+    container_name: stirlingpdf
+    restart: unless-stopped
+    expose:
+      - 8080
+    volumes:
+      - /data/StirlingPDF/trainingData:/usr/share/tessdata # Required for extra OCR languages
+      - /data/StirlingPDF/extraConfigs:/configs
+      - /data/StirlingPDF/customFiles:/customFiles/
+      - /data/StirlingPDF/logs:/logs/
+      - /data/StirlingPDF/pipeline:/pipeline/
+    environment:
+      - DISABLE_ADDITIONAL_FEATURES=false
+      - LANGS=en_GB
+    networks:
+      - dockeronly
+
+networks:
+  dockeronly:
+    name: "dockeronly"
+    internal: true
+    attachable: true
