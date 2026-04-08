@@ -5,9 +5,7 @@
 	}
 }
 
-
-
-jf.local.{$HOSTNAME}:80 jellyfin.local.{$HOSTNAME}:80 jf.vpn.{$HOSTNAME}:80 jellyfin.vpn.{$HOSTNAME}:80 {
+jf.local.{$HOSTNAME}:80 jellyfin.local.{$HOSTNAME}:80 jf.vpn.{$HOSTNAME}:80 jellyfin.vpn.{$HOSTNAME}:80 jf.local.{$HOSTNAME}:8096 jellyfin.local.{$HOSTNAME}:8096 jf.vpn.{$HOSTNAME}:8096 jellyfin.vpn.{$HOSTNAME}:8096 {
 	reverse_proxy jellyfin:8096
 }
 
@@ -39,4 +37,3 @@ recipya.local.{$HOSTNAME}:80 recipya.vpn.{$HOSTNAME}:80 {
 pdf.local.{$HOSTNAME}:80 pdf.vpn.{$HOSTNAME}:80 {
 	reverse_proxy stirlingpdf:8080
 }
-

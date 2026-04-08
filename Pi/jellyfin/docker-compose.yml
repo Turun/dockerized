@@ -12,11 +12,11 @@ services:
       - GUID=1000
       - TZ=Europe/Berlin
     expose:
-      - "8096"
-      - "8920"
+      - "8096"  # default http
+      - "8920"  # default https
     ports:
-      - "1900:1900/udp"
-      - "7359:7359/udp"
+      - "1900:1900/udp"  # DLNA port (local network auto discovery)
+      - "7359:7359/udp"  # client discovery
     volumes:
       - "/data/jellyfin/config:/config"
       - "/data/jellyfin/cache:/cache"
