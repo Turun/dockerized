@@ -38,3 +38,7 @@ recipya.local.{$HOSTNAME}:80 recipya.vpn.{$HOSTNAME}:80 {
 pdf.local.{$HOSTNAME}:80 pdf.vpn.{$HOSTNAME}:80 {
 	reverse_proxy stirlingpdf:8080
 }
+
+immich.local.{$HOSTNAME}:80 immich.vpn.{$HOSTNAME}:80 {
+	reverse_proxy immich_server:2283
+}
