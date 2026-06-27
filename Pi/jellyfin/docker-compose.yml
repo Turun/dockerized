@@ -11,10 +11,12 @@ services:
       - PUID=1000
       - GUID=1000
       - TZ=Europe/Berlin
-    expose:
-      - "8096"  # default http
-      - "8920"  # default https
+    #expose:
+    #  - "8096"  # default http
+    #  - "8920"  # default https
     ports:
+      - "8096:8096"  # default http
+      - "8920:8920"  # default https
       - "1900:1900/udp"  # DLNA port (local network auto discovery)
       - "7359:7359/udp"  # client discovery
     volumes:
