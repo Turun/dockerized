@@ -14,7 +14,12 @@ services:
       - /data/StirlingPDF/pipeline:/pipeline/
     environment:
       - DISABLE_ADDITIONAL_FEATURES=false
+      - JAVA_TOOL_OPTIONS="-Xms100m -Xmx300m"  # Min 512MB, Max 4GB RAM
       - LANGS=en_GB
+    deploy:
+      resources:
+        limits:
+          memory: '500M'
     networks:
       - dockeronly
 
