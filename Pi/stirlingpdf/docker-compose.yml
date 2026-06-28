@@ -1,7 +1,7 @@
 version: '3.3'
 services:
   stirling-pdf:
-    image: docker.stirlingpdf.com/stirlingtools/stirling-pdf:latest
+    image: docker.stirlingpdf.com/stirlingtools/stirling-pdf:latest-ultra-lite
     container_name: stirlingpdf
     restart: unless-stopped
     expose:
@@ -14,12 +14,7 @@ services:
       - /data/StirlingPDF/pipeline:/pipeline/
     environment:
       - DISABLE_ADDITIONAL_FEATURES=false
-      - JAVA_TOOL_OPTIONS="-Xms100m -Xmx300m"  # Min 512MB, Max 4GB RAM
       - LANGS=en_GB
-    deploy:
-      resources:
-        limits:
-          memory: '500M'
     networks:
       - dockeronly
 
