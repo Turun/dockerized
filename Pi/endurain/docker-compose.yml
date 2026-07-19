@@ -1,0 +1,70 @@
+version: "3.5"
+
+services:
+  endurain:
+    container_name: endurain-app
+    image: codeberg.org/endurain-project/endurain:latest
+    env_file:
+      - .env  # LOCAL_PATH, {DB,POSTGRESS}_PASSWORD, {SECRET,FERNT}_KEY, ENDURAIN_HOST
+    environment:
+      - TZ=Europe/Berlin
+      - ENVIRONMENT=dev  # to allow non-https connections
+      - BEHIND_PROXY=true
+      - TRUSTED_PROXIES=caddy
+      - RATE_LIMIT_STORAGE_URI=redis://redis:6379/0
+      - AUTH_SECURITY_STORAGE_URI=redis://redis:6379/0
+    volumes:
+      - ${LOCAL_PATH}/backend/data:/app/backend/data:Z # necessary for activity files, user images and server images persistence on container image updates
+      - ${LOCAL_PATH}/backend/logs:/app/backend/logs:Z # log files for the backend
+    expose:
+      - 8080
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - dockeronly
+      - internet  # for fetching stuff from osm and stuff
+
+   # postgres logic
+  postgres:
+    image: docker.io/postgres:18@sha256:8ff36f3c66371cba71d20ceedccfc3de9669a68737607888c4ef0af93abe8e39
+    container_name: endurain-postgres
+    env_file:
+      - .env  # POSTGRES_{DB,USER}, PGDATA
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U endurain"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ${LOCAL_PATH}/postgres:/var/lib/postgresql/data:Z
+    restart: unless-stopped
+    networks:
+      - dockeronly
+
+  # redis for rate-limiting and auth security storage
+  redis:
+    image: redis:8-alpine@sha256:09160599abd229764c0fb44cb6be640294e1d360a54b19985ab4843dcf2d90f1
+    container_name: redis
+    command: ["redis-server", "--appendonly", "yes"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ${LOCAL_PATH}/redis:/data:Z
+    restart: unless-stopped
+    networks:
+      - dockeronly
+
+networks:
+  dockeronly:
+    name: "dockeronly"
+    internal: true
+    attachable: true
+  internet:
+    name: "internet"
