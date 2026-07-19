@@ -30,6 +30,8 @@ services:
     restart: always
     healthcheck:
       disable: false
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
     deploy:
       resources:
         limits:
@@ -56,11 +58,13 @@ services:
     restart: always
     healthcheck:
       disable: false
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
     deploy:
       resources:
         limits:
           # Number of CPU threads
-          cpus: '1.00'
+          cpus: '3.00'
           # Gigabytes of memory
           memory: '1G'
     networks:
@@ -72,9 +76,11 @@ services:
     image: docker.io/valkey/valkey:9@sha256:3b55fbaa0cd93cf0d9d961f405e4dfcc70efe325e2d84da207a0a8e6d8fde4f9
     environment:
       VALKEY_EXTRA_FLAGS: "--loglevel warning"
+    restart: always
     healthcheck:
       test: redis-cli ping || exit 1
-    restart: always
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
     deploy:
       resources:
         limits:
@@ -102,6 +108,8 @@ services:
     restart: always
     healthcheck:
       disable: false
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
     deploy:
       resources:
         limits:
