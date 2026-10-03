@@ -46,3 +46,7 @@ immich.local.{$HOSTNAME}:80 immich.vpn.{$HOSTNAME}:80 {
 endurain.local.{$HOSTNAME}:80 endurain.vpn.{$HOSTNAME}:80 {
 	reverse_proxy endurain-app:8080
 }
+
+syncthing.vpn.{$HOSTNAME}:80 syncthing.local.{$HOSTNAME}:80 {
+	reverse_proxy syncthing:8384
+}
