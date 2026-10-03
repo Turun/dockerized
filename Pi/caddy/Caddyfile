@@ -47,6 +47,10 @@ endurain.local.{$HOSTNAME}:80 endurain.vpn.{$HOSTNAME}:80 {
 	reverse_proxy endurain-app:8080
 }
 
+dawarich.local.{$HOSTNAME}:80 dawarich.vpn.{$HOSTNAME}:80 {
+	reverse_proxy dawarich_app:3000
+}
+
 syncthing.vpn.{$HOSTNAME}:80 syncthing.local.{$HOSTNAME}:80 {
 	reverse_proxy syncthing:8384
 }
