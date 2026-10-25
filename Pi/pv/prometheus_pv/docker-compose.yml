@@ -1,5 +1,14 @@
 
 services:
+  prometheus_pushgateway:
+    container_name: "prometheus_pushgateway"
+    image: "prom/pushgateway:latest"
+    restart: "unless-stopped"
+    expose:
+      - 9091
+    networks:
+      - dockeronly
+
   prometheus_pv:
     container_name: "prometheus_pv"
     image: "prom/prometheus:latest"

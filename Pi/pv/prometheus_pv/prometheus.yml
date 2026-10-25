@@ -21,4 +21,9 @@ scrape_configs:
     scrape_interval: 60s
     static_configs:
     - targets: ["hoymiles_prometheus_client_pv:3000"]
+  - job_name: "Powermeter"
+    honor_timestamps: true
+    scrape_interval: 10s
+    static_configs:
+    - targets: ["prometheus_pushgateway:9091"]
 

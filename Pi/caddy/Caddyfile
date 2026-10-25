@@ -30,6 +30,9 @@ grafana.local.{$HOSTNAME}:80 grafana.vpn.{$HOSTNAME}:80 {
 prometheus.local.{$HOSTNAME}:80 prometheus.vpn.{$HOSTNAME}:80 {
 	reverse_proxy prometheus_pv:9090
 }
+power.local.{$HOSTNAME}:9091 {
+	reverse_proxy prometheus_pushgateway:9091
+}
 
 recipya.local.{$HOSTNAME}:80 recipya.vpn.{$HOSTNAME}:80 {
 	reverse_proxy recipya:8078
