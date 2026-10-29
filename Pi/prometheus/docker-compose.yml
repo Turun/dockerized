@@ -1,16 +1,21 @@
 
 services:
-  prometheus_pushgateway:
-    container_name: "prometheus_pushgateway"
+  prompushgateway:
+    container_name: "prompushgateway"
     image: "prom/pushgateway:latest"
     restart: "unless-stopped"
     expose:
       - 9091
+    # persistence could be added like this:
+    # command:
+    #   - "--persistence.file=/pushgateway/persist"
+    # volumes:
+    #   - "/data/pushgateway:/pushgateway"
     networks:
       - dockeronly
 
-  prometheus_pv:
-    container_name: "prometheus_pv"
+  prometheus:
+    container_name: "prometheus"
     image: "prom/prometheus:latest"
     restart: "unless-stopped"
     expose:
@@ -20,7 +25,7 @@ services:
       - "--storage.tsdb.retention.time=10y"
     volumes:
       - "./prometheus.yml:/etc/prometheus/prometheus.yml:ro"
-      - "/data/prometheus_pv:/prometheus"
+      - "/data/prometheus:/prometheus"
     networks:
       - internet
       - dockeronly

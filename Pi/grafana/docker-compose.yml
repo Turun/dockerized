@@ -1,13 +1,13 @@
 
 services:
-  grafana_pv:
-    container_name: "grafana_pv"
+  grafana:
+    container_name: "grafana"
     image: "grafana/grafana-oss:latest-ubuntu"
     restart: "unless-stopped"
     expose:
       - 3000
     volumes:
-      - "/data/grafana_pv:/var/lib/grafana"
+      - "/data/grafana:/var/lib/grafana"
     networks:
       - dockeronly
 
