@@ -1,16 +1,10 @@
-
 services:
   prompushgateway:
     container_name: "prompushgateway"
-    image: "prom/pushgateway:latest"
+    build: "."          # replaces prom/pushgateway — ours accepts timestamps
     restart: "unless-stopped"
     expose:
       - 9091
-    # persistence could be added like this:
-    # command:
-    #   - "--persistence.file=/pushgateway/persist"
-    # volumes:
-    #   - "/data/pushgateway:/pushgateway"
     networks:
       - dockeronly
 
@@ -37,4 +31,3 @@ networks:
     attachable: true
   internet:
     name: "internet"
-
