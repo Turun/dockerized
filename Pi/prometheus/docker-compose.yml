@@ -1,13 +1,4 @@
 services:
-  prompushgateway:
-    container_name: "prompushgateway"
-    build: "."          # replaces prom/pushgateway — ours accepts timestamps
-    restart: "unless-stopped"
-    expose:
-      - 9091
-    networks:
-      - dockeronly
-
   prometheus:
     container_name: "prometheus"
     image: "prom/prometheus:latest"

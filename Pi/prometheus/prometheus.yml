@@ -6,6 +6,10 @@ global:
   #external_labels:
   #  monitor: 'codelab-monitor'
 
+storage:
+  tsdb:
+    outofordertimewindow: 36000000
+
 scrape_configs:
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
   #- job_name: "prometheus"
@@ -21,9 +25,10 @@ scrape_configs:
     scrape_interval: 60s
     static_configs:
     - targets: ["hoymiles_prometheus_client:3000"]
-  - job_name: "Powermeter"
-    honor_timestamps: true
-    scrape_interval: 1s
-    static_configs:
-    - targets: ["prompushgateway:9091"]
+  # moved to influxdb, because prometheus really doesn't like data being pushed
+  #- job_name: "Powermeter"
+  #  honor_timestamps: true
+  #  scrape_interval: 1s
+  #  static_configs:
+  #  - targets: ["prompushgateway:9091"]
 

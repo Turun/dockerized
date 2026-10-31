@@ -1,0 +1,3 @@
+-- Runs once on first container start (docker-entrypoint-initdb.d).
+-- Creates the database the receiver writes to and Grafana reads from.
+CREATE DATABASE smartmeter
